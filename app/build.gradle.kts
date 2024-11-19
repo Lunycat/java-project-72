@@ -1,5 +1,5 @@
 plugins {
-    java
+    application
     checkstyle
     jacoco
     id("com.github.johnrengelman.shadow") version "8.1.1"
@@ -15,9 +15,14 @@ repositories {
 dependencies {
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation("org.slf4j:slf4j-api:2.0.16")
-    
+    // https://mvnrepository.com/artifact/io.javalin/javalin
+    implementation("io.javalin:javalin:6.3.0")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+application {
+    mainClass = "hexlet.code.App"
 }
 
 tasks.test {
