@@ -19,6 +19,12 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:2.0.9")
     // https://mvnrepository.com/artifact/io.javalin/javalin
     implementation("io.javalin:javalin:6.3.0")
+    // https://mvnrepository.com/artifact/io.javalin/javalin-bundle
+    implementation("io.javalin:javalin-bundle:6.3.0")
+    // https://mvnrepository.com/artifact/io.javalin/javalin-rendering
+    implementation("io.javalin:javalin-rendering:6.3.0")
+    // https://mvnrepository.com/artifact/gg.jte/jte
+    implementation("gg.jte:jte:3.1.15")
     // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
     implementation("com.zaxxer:HikariCP:6.2.0")
     // https://mvnrepository.com/artifact/com.h2database/h2
