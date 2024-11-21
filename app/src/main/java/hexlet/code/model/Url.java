@@ -20,4 +20,9 @@ public class Url {
         this.name = name;
         createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
+
+    public Url(String name, Timestamp createdAt) {
+        this.name = name;
+        this.createdAt = createdAt;
+    }
 }
