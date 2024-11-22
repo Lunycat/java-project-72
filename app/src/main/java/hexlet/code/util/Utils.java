@@ -1,12 +1,17 @@
 package hexlet.code.util;
 
 import hexlet.code.App;
+import hexlet.code.dto.BasePage;
+
+import io.javalin.http.Context;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 import java.nio.charset.StandardCharsets;
+
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -29,5 +34,11 @@ public class Utils {
                     lines().
                     collect(Collectors.joining("\n"));
         }
+    }
+
+    public static void initializationPageFacade(BasePage page, Context ctx) {
+        page.getFlash().put("message", ctx.consumeSessionAttribute("message"));
+        page.getFlash().put("mode", ctx.consumeSessionAttribute("mode"));
+        page.getFlash().put("svg", ctx.consumeSessionAttribute("svg"));
     }
 }

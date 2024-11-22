@@ -2,7 +2,13 @@ package hexlet.code.repository;
 
 import hexlet.code.model.Url;
 
-import java.sql.*;
+import java.sql.Timestamp;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,12 +56,34 @@ public class UrlRepository extends BaseRepository {
         }
     }
 
-    public static Optional<Url> findName(String searchName) throws SQLException {
+    public static Optional<Url> findName(String nameSearch) throws SQLException {
         String sql = "SELECT * FROM urls WHERE name = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, searchName);
+            stmt.setString(1, nameSearch);
+            ResultSet pointer = stmt.executeQuery();
+
+            if (pointer.next()) {
+                Long id = pointer.getLong("id");
+                String name = pointer.getString("name");
+                Timestamp createdAt = pointer.getTimestamp("created_at");
+
+                Url url = new Url(id, name, createdAt);
+
+                return Optional.of(url);
+            }
+
+            return Optional.empty();
+        }
+    }
+
+    public static Optional<Url> find(Long idSearch) throws SQLException {
+        String sql = "SELECT * FROM urls WHERE id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idSearch);
             ResultSet pointer = stmt.executeQuery();
 
             if (pointer.next()) {

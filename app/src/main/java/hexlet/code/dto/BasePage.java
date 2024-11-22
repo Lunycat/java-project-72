@@ -9,9 +9,8 @@ import java.util.Map;
 @Getter
 @Setter
 public class BasePage {
+
     private Map<String, String> flash;
-    private String message;
-    private String mode;
 
     public BasePage() {
         flash = new HashMap<>();

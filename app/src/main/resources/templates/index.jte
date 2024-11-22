@@ -1,41 +1,25 @@
-@import hexlet.code.dto.urls.UrlsPage
-@import hexlet.code.util.NamedRoutes
+@import hexlet.code.dto.BasePage
 
-@param UrlsPage page
+@param BasePage page
 
 @template.layout.page(content = @`
-    <div class="container-lg mt-5">
-        <h1>Сайты</h1>
-
-        <table class="table table-bordered table-hover mt-3">
-            <thead>
-            <tr>
-                <th class="col-1">ID</th>
-                <th>Имя</th>
-                <th class="col-2">Последняя проверка</th>
-                <th class="col-1">Код ответа</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            @for(var url : page.getUrls())
-                <tr>
-                    <td>
-                        ${url.getId()}
-                    </td>
-                    <td>
-                        <a href ="${NamedRoutes.urlPath(url.getId())}">${url.getName()}</a>
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                </tr>
-            @endfor
-
-            </tbody>
-        </table>
+    <div class="container-fluid bg-primary-subtle p-5">
+        <div class="col-md-10 col-lg-8 mx-auto text-white">
+            <h1>Анализатор страниц</h1>
+            <p>Проверяйте сайты на СЕО пригодность</p>
+            <form action="/urls" method="post" class="rss-form text-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input id="url-input" autofocus="" type="text" required="" name="url" aria-label="url" class="form-control w-100" placeholder="ссылка" autocomplete="off">
+                            <label for="url-input">Ссылка</label>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="h-100 btn btn-lg btn-primary px-sm-5">Проверить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 `, page = page)

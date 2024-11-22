@@ -2,18 +2,23 @@ package hexlet.code;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
+
 import hexlet.code.controller.UrlController;
 import hexlet.code.repository.BaseRepository;
 import hexlet.code.util.NamedRoutes;
 import hexlet.code.util.Utils;
+
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+
+import lombok.extern.slf4j.Slf4j;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,7 +28,6 @@ public class App {
 
     public static void main(String[] args) throws IOException, SQLException {
         Javalin app = getApp();
-
         app.start(Utils.getPort());
     }
 
@@ -48,7 +52,7 @@ public class App {
             config.fileRenderer(new JavalinJte(createTemplateEngine()));
         });
 
-        app.get("/", UrlController::build);
+        app.get(NamedRoutes.rootPath(), UrlController::build);
         app.post(NamedRoutes.urlsPath(), UrlController::create);
         app.get(NamedRoutes.urlsPath(), UrlController::index);
         app.get(NamedRoutes.urlPath("{id}"), UrlController::show);

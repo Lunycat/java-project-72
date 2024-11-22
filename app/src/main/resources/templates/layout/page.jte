@@ -1,5 +1,6 @@
 @import gg.jte.Content
 @import hexlet.code.dto.BasePage
+@import hexlet.code.util.NamedRoutes
 
 @param BasePage page = null
 @param Content content
@@ -20,23 +21,24 @@
 <body>
 <nav class="navbar-expand-lg navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Анализатор страниц</a>
+        <a class="navbar-brand" href="${NamedRoutes.rootPath()}">Анализатор страниц</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Главная</a>
+                    <a class="nav-link" aria-current="page" href="${NamedRoutes.rootPath()}">Главная</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Сайты</a>
+                    <a class="nav-link" href="${NamedRoutes.urlsPath()}">Сайты</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-@if(page.getFlash().get("name") != null)
+
+@if(page.getFlash().get("message") != null)
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
@@ -50,12 +52,14 @@
     </svg>
 
     <div class="alert alert-${page.getFlash().get("mode")} alert-dismissible fade show" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        $unsafe{page.getFlash().get("svg")}
         ${page.getFlash().get("message")}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
+
 ${content}
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
