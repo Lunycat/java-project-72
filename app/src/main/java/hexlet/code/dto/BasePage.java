@@ -10,6 +10,8 @@ import java.util.Map;
 @Setter
 public class BasePage {
     private Map<String, String> flash;
+    private String message;
+    private String mode;
 
     public BasePage() {
         flash = new HashMap<>();

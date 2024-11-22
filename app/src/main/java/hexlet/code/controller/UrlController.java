@@ -19,35 +19,47 @@ public class UrlController {
 
     public static void build(Context ctx) {
         BasePage page = new BasePage();
+        page.setMessage(ctx.consumeSessionAttribute("message"));
+        page.setMode(ctx.consumeSessionAttribute("mode"));
         ctx.render("build.jte", model("page", page));
     }
 
     public static void create(Context ctx) {
         try {
             String urlFromForm = ctx.formParam("url");
-            System.out.println(urlFromForm);
             URI uri = new URI(urlFromForm);
             URL convertedUrl = uri.toURL();
-            Url url = new Url(convertedUrl.getProtocol() + "://" + convertedUrl.getAuthority());
-            UrlRepository.save(url);
 
-            ctx.sessionAttribute("name", "Страница успешно добавлена");
+            Url url = new Url(convertedUrl.getProtocol() + "://" + convertedUrl.getAuthority());
+            Url duplicateUrl = UrlRepository
+                    .findName(url.getName())
+                    .orElseGet(null);
+
+            if (duplicateUrl != null) {
+                ctx.sessionAttribute("message", "Страница успешно добавлена");
+                ctx.sessionAttribute("mode", "success");
+
+                ctx.redirect("/");
+            }
+
+            UrlRepository.save(url);
+            ctx.sessionAttribute("message", "Страница успешно добавлена");
             ctx.sessionAttribute("mode", "success");
             ctx.redirect(NamedRoutes.urlsPath());
+
         } catch (Exception e) {
-            BasePage page = new BasePage();
-            page.getFlash().putAll(Map.of(
-                    "name", "Некорректный URL",
-                    "mode", "danger"));
-            ctx.render("build.jte", model("page", page));
+            ctx.sessionAttribute("message", "Некорректный URL");
+            ctx.sessionAttribute("mode", "danger");
+
+            ctx.redirect("/");
         }
     }
 
     public static void index(Context ctx) throws SQLException {
         List<Url> urls = UrlRepository.getEntities();
         UrlsPage page = new UrlsPage(urls);
-        page.getFlash().put("name", ctx.consumeSessionAttribute("name"));
-        page.getFlash().put("mode", ctx.consumeSessionAttribute("mode"));
+        page.setMessage(ctx.consumeSessionAttribute("message"));
+        page.setMode(ctx.consumeSessionAttribute("mode"));
         ctx.render("index.jte", model("page", page));
     }
 
