@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Getter
 @NoArgsConstructor
@@ -23,5 +24,9 @@ public class Url {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
+    }
+
+    public String getCreatedAt() {
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(createdAt);
     }
 }

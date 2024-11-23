@@ -1,6 +1,7 @@
 package hexlet.code.repository;
 
 import hexlet.code.model.Url;
+import hexlet.code.util.Utils;
 
 import java.sql.Timestamp;
 import java.sql.Statement;
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,9 +47,9 @@ public class UrlRepository extends BaseRepository {
             while (pointer.next()) {
                 Long id = pointer.getLong("id");
                 String name = pointer.getString("name");
-                Timestamp timestamp = pointer.getTimestamp("created_at");
+                Timestamp createdAt = pointer.getTimestamp("created_at");
 
-                Url url = new Url(id, name, timestamp);
+                Url url = new Url(id, name, createdAt);
 
                 urls.add(url);
             }

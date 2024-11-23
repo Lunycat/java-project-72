@@ -31,7 +31,7 @@
                 <form method="post" action="/urls/1/checks">
                     <button type="submit" class="btn btn-primary">Запустить проверку</button>
                 </form>
-                <table class="table table-bordered border-primary">
+                <table class="table table-bordered border-primary mt-3">
                     <thead>
                     <th class="col-1">ID</th>
                     <th class="col-1">Код ответа</th>
