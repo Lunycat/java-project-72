@@ -16,7 +16,7 @@
           rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
-    <title>Analizstor </title>
+    <title>Анализатор страниц</title>
 </head>
 <body>
 <nav class="navbar-expand-lg navbar navbar-dark bg-dark">
@@ -51,7 +51,7 @@
         </symbol>
     </svg>
 
-    <div class="alert alert-${page.getFlash().get("mode")} alert-dismissible fade show" role="alert">
+    <div class="rounded-0 m-0 alert alert-${page.getFlash().get("mode")} alert-dismissible fade show" role="alert">
         $unsafe{page.getFlash().get("svg")}
         ${page.getFlash().get("message")}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

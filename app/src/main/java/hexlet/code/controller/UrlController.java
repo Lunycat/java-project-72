@@ -9,6 +9,7 @@ import hexlet.code.util.NamedRoutes;
 import hexlet.code.util.Utils;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
 import java.net.URL;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
 
+@Slf4j
 public class UrlController {
 
     public static void build(Context ctx) {
@@ -40,16 +42,16 @@ public class UrlController {
             if (duplicateUrl != null) {
                 ctx.sessionAttribute("message", "Страница уже существует");
                 ctx.sessionAttribute("mode", "primary");
-                ctx.sessionAttribute("svg", "<svg class=\"bi flex-shrink-0 me-2\" width=\"24\" height=\"24\" " +
-                        "role=\"img\" aria-label=\"Info:\"><use xlink:href=\"#info-fill\"/></svg>");
+                ctx.sessionAttribute("svg", "<svg class=\"bi flex-shrink-0 me-2\" width=\"24\" height=\"24\" "
+                        + "role=\"img\" aria-label=\"Info:\"><use xlink:href=\"#info-fill\"/></svg>");
 
                 ctx.redirect(NamedRoutes.urlsPath());
             } else {
                 UrlRepository.save(url);
                 ctx.sessionAttribute("message", "Страница успешно добавлена");
                 ctx.sessionAttribute("mode", "success");
-                ctx.sessionAttribute("svg", "<svg class=\"bi flex-shrink-0 me-2\" width=\"24\" height=\"24\" " +
-                        "role=\"img\" aria-label=\"Success:\"><use xlink:href=\"#check-circle-fill\"/></svg>");
+                ctx.sessionAttribute("svg", "<svg class=\"bi flex-shrink-0 me-2\" width=\"24\" height=\"24\" "
+                        + "role=\"img\" aria-label=\"Success:\"><use xlink:href=\"#check-circle-fill\"/></svg>");
 
                 ctx.redirect(NamedRoutes.urlsPath());
             }
@@ -57,8 +59,8 @@ public class UrlController {
         } catch (Exception e) {
             ctx.sessionAttribute("message", "Некорректный URL");
             ctx.sessionAttribute("mode", "danger");
-            ctx.sessionAttribute("svg", "<svg class=\"bi flex-shrink-0 me-2\" width=\"24\" height=\"24\" " +
-                    "role=\"img\" aria-label=\"Danger:\"><use xlink:href=\"#exclamation-triangle-fill\"/></svg>");
+            ctx.sessionAttribute("svg", "<svg class=\"bi flex-shrink-0 me-2\" width=\"24\" height=\"24\" "
+                    + "role=\"img\" aria-label=\"Danger:\"><use xlink:href=\"#exclamation-triangle-fill\"/></svg>");
 
             ctx.redirect(NamedRoutes.rootPath());
         }
