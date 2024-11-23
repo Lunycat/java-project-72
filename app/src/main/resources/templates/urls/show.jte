@@ -10,7 +10,7 @@
             <div class="container-lg mt-5">
                 <h1>Сайт: ${page.getUrl().getName()}</h1>
 
-                <table class="table table-bordered table-hover mt-3">
+                <table class="table table-bordered border-primary">
                     <tbody>
                     <tr>
                         <td>ID</td>
@@ -31,8 +31,7 @@
                 <form method="post" action="/urls/1/checks">
                     <button type="submit" class="btn btn-primary">Запустить проверку</button>
                 </form>
-
-                <table class="table table-bordered table-hover mt-3">
+                <table class="table table-bordered border-primary">
                     <thead>
                     <th class="col-1">ID</th>
                     <th class="col-1">Код ответа</th>

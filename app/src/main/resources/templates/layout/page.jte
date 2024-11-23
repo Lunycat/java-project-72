@@ -16,7 +16,7 @@
           rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
-    <title>Document</title>
+    <title>Analizstor </title>
 </head>
 <body>
 <nav class="navbar-expand-lg navbar navbar-dark bg-dark">
