@@ -40,10 +40,4 @@ public class Utils {
                     collect(Collectors.joining("\n"));
         }
     }
-
-    public static void initializationPageFacade(BasePage page, Context ctx) {
-        page.getFlash().put("message", ctx.consumeSessionAttribute("message"));
-        page.getFlash().put("mode", ctx.consumeSessionAttribute("mode"));
-        page.getFlash().put("svg", ctx.consumeSessionAttribute("svg"));
-    }
 }

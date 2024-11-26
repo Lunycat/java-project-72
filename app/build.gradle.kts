@@ -14,6 +14,7 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/com.h2database/h2
     implementation("com.h2database:h2:2.2.220")
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation("org.slf4j:slf4j-simple:2.0.9")
@@ -27,7 +28,11 @@ dependencies {
     implementation("gg.jte:jte:3.1.15")
     // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
     implementation("com.zaxxer:HikariCP:6.2.0")
-    // https://mvnrepository.com/artifact/com.h2database/h2
+    // https://mvnrepository.com/artifact/com.konghq/unirest-java
+    implementation("com.konghq:unirest-java:3.14.5")
+    // https://mvnrepository.com/artifact/org.jsoup/jsoup
+    implementation("org.jsoup:jsoup:1.18.1")
+
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

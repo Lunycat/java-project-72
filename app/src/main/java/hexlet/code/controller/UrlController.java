@@ -9,6 +9,8 @@ import hexlet.code.util.NamedRoutes;
 import hexlet.code.util.Utils;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
@@ -23,7 +25,7 @@ public class UrlController {
 
     public static void build(Context ctx) {
         BasePage page = new BasePage();
-        Utils.initializationPageFacade(page, ctx);
+        initializationPageFacade(page, ctx);
 
         ctx.render("index.jte", model("page", page));
     }
@@ -69,18 +71,23 @@ public class UrlController {
     public static void index(Context ctx) throws SQLException {
         List<Url> urls = UrlRepository.getEntities();
         UrlsPage page = new UrlsPage(urls);
-        Utils.initializationPageFacade(page, ctx);
+        initializationPageFacade(page, ctx);
 
         ctx.render("urls/index.jte", model("page", page));
     }
 
     public static void show(Context ctx) throws SQLException {
         Long id = ctx.pathParamAsClass("id", Long.class).get();
-        Url url = UrlRepository
-                .find(id)
+        Url url = UrlRepository.find(id)
                 .orElseThrow(() -> new NotFoundResponse("Not found URL"));
         UrlPage page = new UrlPage(url);
 
         ctx.render("urls/show.jte", model("page", page));
+    }
+
+    private static void initializationPageFacade(BasePage page, Context ctx) {
+        page.getFlash().put("message", ctx.consumeSessionAttribute("message"));
+        page.getFlash().put("mode", ctx.consumeSessionAttribute("mode"));
+        page.getFlash().put("svg", ctx.consumeSessionAttribute("svg"));
     }
 }
