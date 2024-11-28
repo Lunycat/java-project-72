@@ -1,4 +1,5 @@
 @import hexlet.code.dto.urls.UrlsPage
+@import hexlet.code.model.UrlCheck
 @import hexlet.code.util.NamedRoutes
 
 @param UrlsPage page
@@ -9,28 +10,30 @@
 
         <table class="table table-bordered border-primary">
             <thead>
+
             <tr>
                 <th class="col-1">ID</th>
                 <th>Имя</th>
                 <th class="col-2">Последняя проверка</th>
                 <th class="col-1">Код ответа</th>
             </tr>
+
             </thead>
             <tbody>
 
             @for(var url : page.getUrls())
                 <tr>
+                    <td>${url.getId()}</td>
+                    <td><a href ="${NamedRoutes.urlPath(url.getId())}">${url.getName()}</a></td>
                     <td>
-                        ${url.getId()}
+                        @if(!url.getUrlCheckList().isEmpty())
+                            ${url.getUrlCheckList().get(0).getCreatedAt()}
+                        @endif
                     </td>
                     <td>
-                        <a href ="${NamedRoutes.urlPath(url.getId())}">${url.getName()}</a>
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
+                        @if(!url.getUrlCheckList().isEmpty())
+                            ${url.getUrlCheckList().get(0).getStatusCode()}
+                        @endif
                     </td>
                 </tr>
             @endfor

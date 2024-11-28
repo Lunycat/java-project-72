@@ -19,17 +19,19 @@ import java.util.Optional;
 public class UrlRepository extends BaseRepository {
 
     public static void save(Url url) throws SQLException {
-        String sql = "INSERT INTO urls (name, created_at) VALUES (?, ?)";
-
+        String sql = """
+                INSERT INTO urls (name, created_at)
+                VALUES (?, ?)
+                """;
         try (Connection connection = dataSource.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, url.getName());
             stmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
             stmt.executeUpdate();
-            ResultSet key = stmt.getGeneratedKeys();
+            ResultSet pointerKey = stmt.getGeneratedKeys();
 
-            if (key.next()) {
-                url.setId(key.getLong(1));
+            if (pointerKey.next()) {
+                url.setId(pointerKey.getLong(1));
             } else {
                 throw new SQLException("DB have not returned an id after saving an entity");
             }
@@ -59,7 +61,10 @@ public class UrlRepository extends BaseRepository {
     }
 
     public static Optional<Url> findName(String nameSearch) throws SQLException {
-        String sql = "SELECT * FROM urls WHERE name = ?";
+        String sql = """
+            SELECT * FROM urls
+            WHERE name = ?
+            """;
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
