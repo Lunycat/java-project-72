@@ -43,6 +43,27 @@ public class UrlCheckRepository extends BaseRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, url.getId());
+            ResultSet pointer = stmt.executeQuery();
+
+            while (pointer.next()) {
+                Long id = pointer.getLong("id");
+                int statusCode = pointer.getInt("status_code");
+                String title = pointer.getString("title");
+                String h1 = pointer.getString("h1");
+                String description = pointer.getString("description");
+                Timestamp createdAt = pointer.getTimestamp("created_at");
+
+                UrlCheck urlCheck = UrlCheck.builder()
+                        .id(id)
+                        .statusCode(statusCode)
+                        .title(title)
+                        .h1(h1)
+                        .description(description)
+                        .createdAt(createdAt)
+                        .build();
+
+                url.getUrlCheckList().add(urlCheck);
+            }
         }
     }
 }

@@ -60,6 +60,9 @@ public class UrlController {
 
     public static void index(Context ctx) throws SQLException {
         List<Url> urls = UrlRepository.getEntities();
+        for (Url url : urls) {
+            UrlCheckRepository.setUrlChecks(url);
+        }
         UrlsPage page = new UrlsPage(urls);
         initializationPageFacade(page, ctx);
 
@@ -72,6 +75,7 @@ public class UrlController {
                 .orElseThrow(() -> new NotFoundResponse("Not found URL"));
         UrlCheckRepository.setUrlChecks(url);
         UrlPage page = new UrlPage(url);
+        initializationPageFacade(page, ctx);
 
         ctx.render("urls/show.jte", model("page", page));
     }

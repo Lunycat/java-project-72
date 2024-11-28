@@ -1,11 +1,10 @@
 package gg.jte.generated.ondemand.urls;
 import hexlet.code.dto.urls.UrlsPage;
-import hexlet.code.model.UrlCheck;
 import hexlet.code.util.NamedRoutes;
 @SuppressWarnings("unchecked")
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "urls/index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,4,6,6,6,6,23,23,25,25,25,26,26,26,26,26,26,26,26,26,26,26,26,28,28,29,29,29,30,30,33,33,34,34,34,35,35,38,38,43,43,43,43,43,4,4,4,4};
+	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,3,5,5,5,5,22,22,24,24,24,25,25,25,25,25,25,25,25,25,25,25,25,27,27,28,28,28,29,29,32,32,33,33,33,34,34,37,37,42,42,42,42,42,3,3,3,3};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, UrlsPage page) {
 		jteOutput.writeContent("\r\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, page, new gg.jte.html.HtmlContent() {

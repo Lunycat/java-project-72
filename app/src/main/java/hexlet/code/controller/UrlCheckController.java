@@ -47,7 +47,7 @@ public class UrlCheckController {
             setSessionAttributeFacade(ctx, "success");
             ctx.redirect(NamedRoutes.urlPath(id));
 
-        } catch (NotFoundResponse e) {
+        } catch (Exception e) {
             setSessionAttributeFacade(ctx, "danger");
             ctx.redirect(NamedRoutes.urlPath(id));
         }
