@@ -15,6 +15,7 @@ import hexlet.code.util.Utils;
 
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
@@ -24,6 +25,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+@Slf4j
 public class App {
 
     public static void main(String[] args) throws IOException, SQLException {
@@ -37,7 +39,7 @@ public class App {
 
         HikariDataSource dataSource = new HikariDataSource(configHi);
         String sql = Files.readString(Paths.get("./src/main/resources/schema.sql"));
-
+        log.info(sql);
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
             statement.execute(sql);
