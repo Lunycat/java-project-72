@@ -3,7 +3,13 @@ package hexlet.code.repository;
 import hexlet.code.model.Url;
 import hexlet.code.model.UrlCheck;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.sql.ResultSet;
+
 import java.time.LocalDateTime;
 
 public class UrlCheckRepository extends BaseRepository {
@@ -33,7 +39,7 @@ public class UrlCheckRepository extends BaseRepository {
         }
     }
 
-    public static void setUrlChecks (Url url) throws SQLException {
+    public static void setUrlChecks(Url url) throws SQLException {
         String sql = """
                 SELECT * FROM url_checks
                 WHERE url_id = ?

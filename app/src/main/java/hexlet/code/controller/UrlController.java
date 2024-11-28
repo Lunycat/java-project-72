@@ -106,6 +106,7 @@ public class UrlController {
                 ctx.sessionAttribute("svg", "<svg class=\"bi flex-shrink-0 me-2\" width=\"24\" height=\"24\" "
                         + "role=\"img\" aria-label=\"Info:\"><use xlink:href=\"#info-fill\"/></svg>");
             }
+            default -> throw new RuntimeException();
         }
     }
 }

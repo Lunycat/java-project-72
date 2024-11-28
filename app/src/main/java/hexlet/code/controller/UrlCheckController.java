@@ -4,8 +4,8 @@ import hexlet.code.model.Url;
 import hexlet.code.model.UrlCheck;
 import hexlet.code.repository.UrlCheckRepository;
 import hexlet.code.repository.UrlRepository;
-
 import hexlet.code.util.NamedRoutes;
+
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 
@@ -16,11 +16,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.sql.SQLException;
-
 public class UrlCheckController {
 
-    public static void check(Context ctx) throws SQLException {
+    public static void check(Context ctx) {
         Long id = ctx.pathParamAsClass("id", Long.class).get();
 
         try {

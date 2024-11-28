@@ -18,13 +18,12 @@ import io.javalin.rendering.template.JavalinJte;
 
 import java.io.IOException;
 
-import lombok.extern.slf4j.Slf4j;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@Slf4j
 public class App {
 
     public static void main(String[] args) throws IOException, SQLException {
@@ -37,7 +36,7 @@ public class App {
         configHi.setJdbcUrl(Utils.getUrl());
 
         HikariDataSource dataSource = new HikariDataSource(configHi);
-        String sql = Utils.readResources("schema.sql");
+        String sql = Files.readString(Paths.get("./src/main/resources/schema.sql"));
 
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
