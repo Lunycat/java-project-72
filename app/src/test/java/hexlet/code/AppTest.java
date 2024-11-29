@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AppTest {
+public final class AppTest {
 
     private static Javalin app;
     private static MockWebServer mockWebServer;

@@ -9,17 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class Url {
+public final class Url {
 
     @Setter
     private Long id;
     private String name;
     private Timestamp createdAt;
     private List<UrlCheck> urlCheckList;
-
-    public Url() {
-        urlCheckList = new ArrayList<>();
-    }
 
     public Url(String name) {
         this.name = name;

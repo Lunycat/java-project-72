@@ -18,6 +18,8 @@ import io.javalin.rendering.template.JavalinJte;
 
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,7 +36,7 @@ public class App {
         configHi.setJdbcUrl(Utils.getUrl());
 
         HikariDataSource dataSource = new HikariDataSource(configHi);
-        String sql = Utils.readResources("schema.sql");
+        String sql = Files.readString(Paths.get("./src/main/resources/schema.sql"));
 
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
