@@ -4,6 +4,7 @@ import hexlet.code.dto.BasePage;
 import hexlet.code.dto.urls.UrlPage;
 import hexlet.code.dto.urls.UrlsPage;
 import hexlet.code.model.Url;
+import hexlet.code.model.UrlCheck;
 import hexlet.code.repository.UrlCheckRepository;
 import hexlet.code.repository.UrlRepository;
 import hexlet.code.util.NamedRoutes;
@@ -19,6 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 
 import java.util.List;
+import java.util.Map;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
 
@@ -60,10 +62,8 @@ public class UrlController {
 
     public static void index(Context ctx) throws SQLException {
         List<Url> urls = UrlRepository.getEntities();
-        for (Url url : urls) {
-            UrlCheckRepository.setUrlChecks(url);
-        }
-        UrlsPage page = new UrlsPage(urls);
+        Map<Long, UrlCheck> urlChecks = UrlCheckRepository.findLastChecks();
+        UrlsPage page = new UrlsPage(urls, urlChecks);
         initializationPageFacade(page, ctx);
 
         ctx.render("urls/index.jte", model("page", page));

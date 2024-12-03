@@ -11,6 +11,8 @@ import java.sql.Timestamp;
 import java.sql.ResultSet;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UrlCheckRepository extends BaseRepository {
 
@@ -71,5 +73,32 @@ public class UrlCheckRepository extends BaseRepository {
                 url.getUrlCheckList().add(urlCheck);
             }
         }
+    }
+
+    public static Map<Long, UrlCheck> findLastChecks() throws SQLException {
+        String sql = """
+                SELECT DISTINCT ON (url_id) * FROM url_checks
+                ORDER BY url_id DESC, id DESC
+                """;
+        Map<Long, UrlCheck> result = new HashMap<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet pointer = stmt.executeQuery();
+
+            while (pointer.next()) {
+                Long urlId = pointer.getLong("url_id");
+                int statusCode = pointer.getInt("status_code");
+                Timestamp createdAt = pointer.getTimestamp("created_at");
+
+                UrlCheck urlCheck = UrlCheck.builder()
+                        .statusCode(statusCode)
+                        .createdAt(createdAt)
+                        .build();
+
+                result.put(urlId, urlCheck);
+            }
+        }
+
+        return result;
     }
 }

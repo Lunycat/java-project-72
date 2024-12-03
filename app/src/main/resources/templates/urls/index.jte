@@ -25,13 +25,13 @@
                     <td>${url.getId()}</td>
                     <td><a href ="${NamedRoutes.urlPath(url.getId())}">${url.getName()}</a></td>
                     <td>
-                        @if(!url.getUrlCheckList().isEmpty())
-                            ${url.getUrlCheckList().get(0).getCreatedAt()}
+                        @if(page.getUrlChecks().get(url.getId()) != null)
+                            ${page.getUrlChecks().get(url.getId()).getCreatedAt()}
                         @endif
                     </td>
                     <td>
-                        @if(!url.getUrlCheckList().isEmpty())
-                            ${url.getUrlCheckList().get(0).getStatusCode()}
+                        @if(page.getUrlChecks().get(url.getId()) != null)
+                            ${page.getUrlChecks().get(url.getId()).getStatusCode()}
                         @endif
                     </td>
                 </tr>
