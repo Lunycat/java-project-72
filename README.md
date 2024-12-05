@@ -5,7 +5,7 @@
 [![Java CI](https://github.com/Lunycat/java-project-72/actions/workflows/main.yaml/badge.svg)](https://github.com/Lunycat/java-project-72/actions/workflows/main.yaml)
 
 # Описание
-[Анализатор страниц](https://java-project-72-vbkc.onrender.com) - полноценный веб-сайт на базе Javelin framework, который анализирует заданные страницы на предмет SEO-соответствия.
+[Анализатор страниц](https://java-project-72-vbkc.onrender.com) - полноценный веб-сайт на базе Javalin framework, который анализирует заданные страницы на предмет SEO-соответствия.
 
 
 ## Инструкция пользования
@@ -17,7 +17,7 @@
 
 ![Компьютер](img/index.jpg)
 
-Переходим по ссылке на интересующий сайт. Здесь мы видим общую информацию по сайту, а именно его id, имя и дату добавления:
+Переходим по ссылке на интересующий нас сайт. Здесь мы видим общую информацию по сайту, а именно его id, имя и дату добавления:
 
 ![Компьютер](img/show.jpg)
 
